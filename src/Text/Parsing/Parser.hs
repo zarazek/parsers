@@ -24,7 +24,7 @@ import Data.Maybe (listToMaybe)
 import qualified Data.CharSet as CS (member, fromList)
 import qualified Data.ListTrie.Base.Map as M (WrappedIntMap)
 import qualified Data.ListTrie.Patricia.Map as ST (TrieMap, empty)
-import qualified Data.Trie as BT (empty)
+import qualified Data.Trie.BigEndianPatricia.Base as BT (empty)
 import Data.Hashable (Hashable)
 
 class MonadPlus (p lbl lst) => Parser p lbl lst where

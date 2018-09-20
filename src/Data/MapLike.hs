@@ -5,7 +5,7 @@ module Data.MapLike ( MapLike(..) ) where
 import qualified Data.ByteString.Char8 as B
 import qualified Data.ListTrie.Base.Map as M (WrappedIntMap)
 import qualified Data.ListTrie.Patricia.Map as ST
-import qualified Data.Trie as BT
+import qualified Data.Trie.BigEndianPatricia.Base as BT
 
 class MapLike (m :: * -> *) (k :: *) | m -> k where
   empty :: m v

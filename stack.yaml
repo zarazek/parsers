@@ -1,14 +1,18 @@
 # For more information, see: http://docs.haskellstack.org/en/stable/yaml_configuration.html
 
 # Specifies the GHC version and set of packages available (e.g., lts-3.5, nightly-2015-09-21, ghc-7.10.2)
-resolver: lts-5.11
+resolver: lts-12.10
 
 # Local packages, usually specified by relative directory name
 packages:
 - '.'
+- location:
+    git: https://github.com/obsidiansystems/bytestring-trie.git
+    commit: 27117ef4f9f01f70904f6e8007d33785c4fe300b
+  extra-dep: true
 
 # Packages to be pulled from upstream that are not in the resolver (e.g., acme-missiles-0.3)
-extra-deps: [monad-memo-0.4.1, list-tries-0.6.1]
+extra-deps: [list-tries-0.6.5]
 
 # Override default flag values for local packages and extra-deps
 flags: {}
