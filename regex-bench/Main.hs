@@ -11,6 +11,7 @@ import qualified Text.Parsing.Maybe.Simple as MS
 import qualified Text.Parsing.Maybe.StaticInfo as MI
 import qualified Text.Parsing.Generic.Simple as GS
 import qualified Text.Parsing.Generic.StaticInfo as GI
+import qualified Text.Parsing.Generic.MostGeneric as GM
 import qualified Data.Attoparsec.Internal.Types as AI (Parser)
 import Data.ByteString.Char8 (ByteString, pack)
 import Criterion.Main
@@ -27,6 +28,7 @@ regexParser id txt = bgroup name [ bench "list simple"                    $ nf (
                                  , bench "generic list static info"       $ nf (simpleParse (regex       :: GI.Parser        []    Char String ByteString Regex)) txt
                                  , bench "generic maybe simple"           $ nf (simpleParse (regex       :: GS.Parser        Maybe      String ByteString Regex)) txt
                                  , bench "generic maybe static info"      $ nf (simpleParse (regex       :: GI.Parser        Maybe Char String ByteString Regex)) txt
+                                 , bench "most generic maybe"             $ nf (simpleParse (regex       :: GM.Parser              Char String ByteString Regex)) txt
                                  , bench "attoparsec"                     $ nf (simpleParse (regex       :: AttoparsecParser            String ByteString Regex)) txt
                                  , bench "fast list simple"               $ nf (simpleParse (fasterRegex :: LS.Parser                   String ByteString Regex)) txt
                                  , bench "fast list static info"          $ nf (simpleParse (fasterRegex :: LI.Parser              Char String ByteString Regex)) txt
@@ -51,9 +53,9 @@ txt5 = "a*b*c*d*e*f*g*h*i*j*k*l*m*n*o*(p*(q*(r*(s*(t*(u*(v*(w*(x*(y*z*)*)*)*)*)*
 txt6 = "(((abc){10,20}cde*f*){10,20}((g(h|i|jk*)*)+){10,20}){10,20}"
 
 main = defaultMain [ regexParser 0 txt0
-                   , regexParser 1 txt1 ]
-                   -- , regexParser 2 txt2
-                   -- , regexParser 3 txt3
-                   -- , regexParser 4 txt4
-                   -- , regexParser 5 txt5
-                   -- , regexParser 6 txt6 ]
+                   , regexParser 1 txt1
+                   , regexParser 2 txt2
+                   , regexParser 3 txt3
+                   , regexParser 4 txt4
+                   , regexParser 5 txt5
+                   , regexParser 6 txt6 ]

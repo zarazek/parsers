@@ -144,6 +144,14 @@ instance (Hashable lbl, Eq lbl) => Parser (MMG.Parser Char) lbl String where
   label = MMG.label
   simpleParse = MMG.simpleParseST (ST.empty :: ST.TrieMap M.WrappedIntMap Char v)
 
+instance (Hashable lbl, Eq lbl) => Parser (MMG.Parser Char) lbl ByteString where
+  char = MMG.char
+  satisfy = MMG.satisfy
+  oneOf = MMG.oneOf
+  decimal = MMG.decimal
+  string = MMG.string
+  label = MMG.label
+  simpleParse = MMG.simpleParseST BT.empty
 
 newtype AttoparsecParser lbl lst a = AttoparsecParser (AI.Parser lst a)
   deriving (Functor, Applicative, Alternative, Monad, MonadPlus)
